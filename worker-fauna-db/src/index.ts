@@ -44,3 +44,32 @@ app.post('/products', async (c) => {
   const result = await c.var.faunaClient.query<Product>(query);
   return c.json(result.data);
 });
+
+app.onError((e, c) => {
+  if (e instanceof ServiceError) {
+    return c.json(
+      {
+        status: e.httpStatus,
+        code: e.code,
+        message: e.message,
+      },
+      
+    );
+  }
+  console.trace(e);
+  return c.text('Internal Server Error', 500);
+});
+
+app.get('/products/:productId', async (c) => {
+  const productId = c.req.param('productId');
+  const query = fql`Products.byId(${productId})`;
+  const result = await c.var.faunaClient.query<Product>(query);
+  return c.json(result.data);
+});
+
+app.delete('/products/:productId', async (c) => {
+  const productId = c.req.param('productId');
+  const query = fql`Products.byId(${productId})!.delete()`;
+  const result = await c.var.faunaClient.query<Product>(query);
+  return c.json(result.data);
+});
