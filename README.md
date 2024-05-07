@@ -1,8 +1,7 @@
-# Read CONTRIBUTING.md for 'How to contribute ?'
-# MLSC_static-web
+# InteriorWebsite
+Static Website for Interior Decorator company
 
-EXAMPLE-1 TO CHANGE THE BORDER OF GIVEN HTML ELEMENT
+This is a static template and it contains some essential services which is needed for any Interior decorator.
+If User go to the service page, user should do enquiry for perticular service from that page.
 
-       p {
-          border: 2px solid powderblue;
-         }
+
