@@ -20,10 +20,9 @@ type Product = {
 const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
 app.use('*', async (c, next) => {
-  const key= "fnAFg-1BwCAAziE_1-ARRX_vurdsZWXGPTxGfuBy"
   const faunaClient = new Client({
     
-    secret: key,
+    secret: c.env.FAUNA_SECRET,
   });
   c.set('faunaClient', faunaClient);
   await next();
